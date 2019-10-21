@@ -13,6 +13,23 @@ struct node* Newnode(int data){
     return temp;
 };
 
+// Iterative Approach
+void IterativeInorder(struct node* root){
+    stack<node*> s;
+    struct node* curr=root;
+    while(curr || !s.empty()){
+        while(curr){
+            s.push(curr);
+            curr = curr->left;
+        }
+        curr = s.top();
+        cout<<curr->data<<" ";
+        s.pop();
+        curr = curr->right;
+    }
+}
+
+// Recursive Approach
 void inorder(struct node* root){
     if(!root)
         return;
