@@ -22,7 +22,7 @@ void Reverse_level(struct node* root){
     vector<int> v;
     q.push(root);
     while(!q.empty()){
-    	//root = q.front();
+    	root = q.front();
     	q.pop();
     	v.push_back(root->data);
     	// for L-R right is chosen first
