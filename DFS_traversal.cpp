@@ -13,12 +13,34 @@ struct node* Newnode(int data){
     return temp;
 };
 
+
+// preorder traversal
+void preorder(struct node* root){
+    if(!root)
+        return;
+    
+    cout<<root->data<<" ";
+    preorder(root->left);
+    preorder(root->right);
+}
+
+// inorder traversal
 void inorder(struct node* root){
     if(!root)
         return;
     inorder(root->left);
     cout<<root->data<<" ";
     inorder(root->right);
+}
+
+
+// postorder traversal
+void postorder(struct node* root){
+    if(!root)
+        return;
+    postorder(root->left);
+    postorder(root->right);
+    cout<<root->data<<" ";
 }
 
 int main()
