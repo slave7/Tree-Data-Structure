@@ -5,7 +5,6 @@ struct node
     int data;
     struct node *left, *right;
 };
-
 // new node insertion
 struct node* Newnode(int data){
     struct node* temp = new node;
@@ -14,37 +13,50 @@ struct node* Newnode(int data){
     return temp;
 };
 
-// reverse printing of level order L-R
-void Reverse_level(struct node* root){
-    if(!root)
-        return;
-    queue<node*> q;
-    vector<int> v;
-    q.push(root);
-    while(!q.empty()){
-    	root = q.front();
-    	q.pop();
-    	v.push_back(root->data);
-    	// for L-R right is chosen first
-    	if(root->right)
-    		q.push(root->right);
-    	if(root->left)
-    		q.push(root->left);
+// height of tree
+int height(node* node)  
+{  
+    if (node == NULL)  
+        return 0;  
+    else
+    {  
+        int lheight = height(node->left);  
+        int rheight = height(node->right);  
+  
+        return (1+max(lheight,rheight));
     }
-    int n = v.size();
-    for (int i = n-1; i>-1; i--)
-    	cout<<v[i]<<" ";
+}
+
+void printGivenLevel(node* root, int level)  
+{  
+    if (root == NULL)  
+        return;  
+    if (level == 1)  
+        cout << root->data << " ";  
+    else if (level > 1)  
+    {  
+        printGivenLevel(root->left, level-1);  
+        printGivenLevel(root->right, level-1);  
+    }  
+}  
+
+void printLevelOrder(node* root)  
+{  
+    int h = height(root);  
+    int i;  
+    for (i = 1; i <= h; i++)  
+        printGivenLevel(root, i);  
 }
 
 int main()
 {
-    struct node *root = Newnode(1);
-    root->left = Newnode(2);
-    root->right = Newnode(3);
+    struct node *root = Newnode(13);
+    root->left = Newnode(12);
+    root->right = Newnode(10);
     root->left->left = Newnode(4);
-    root->left->right = Newnode(5);
-    root->right->right = Newnode(7);
-    root->right->left = Newnode(6);
-    Reverse_level(root);
+    root->left->right = Newnode(19);
+    root->right->right = Newnode(9);
+    root->right->left = Newnode(16);
+    printLevelOrder(root);
     return 0;
 }
