@@ -14,15 +14,15 @@ struct node* Newnode(int data){
     return temp;
 };
 
-// height
+// height using recursion.
 int height(node* node)  
 {  
     if (node == NULL)  
         return 0;  
     else
     {  
-        int lheight = height(node->left);  
-        int rheight = height(node->right);  
+        int lheight = height(node->left);  // left height
+        int rheight = height(node->right);  // right height
   
         return (1+max(lheight,rheight));
     }
